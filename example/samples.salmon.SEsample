@@ -1,0 +1,21 @@
+###################################################################################
+#       File "sample" - sample description file
+#       Specify the names of the sample files and tag them as "treat" and "control".
+###################################################################################
+#       Specify the genome file, and specify the path where the 
+#       indexed file will be stored, and the prifex of the indexed genome.
+#       Default is 'bowtie2_genome'.
+GENOME orf_coding_all.fasta transcripts_index
+#       Specify the fastq files
+#       Specify the output name of the quant files.   
+#       Followed by the tag/class/condition of the sample (treated or control)
+#       List all the fastq files as bellow.
+FASTQ sampleTreat_1.R1.fq sal_quant1 treat
+FASTQ sampleTreat_2.R1.fq sal_quant2 treat
+FASTQ sampleTreat_3.R1.fq sal_quant3 treat
+FASTQ sampleCtrl_1.R1.fq sal_quant4 control
+FASTQ sampleCtrl_2.R1.fq sal_quant5 control
+FASTQ sampleCtrl_3.R1.fq sal_quant6 control
+#
+#       End of file "sample"
+#

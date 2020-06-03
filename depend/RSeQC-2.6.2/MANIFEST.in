@@ -1,0 +1,35 @@
+include MANIFEST.in
+
+include distribute_setup.py
+recursive-include lib/src *.h
+recursive-include lib/src *.c
+recursive-include lib *.h
+recursive-include lib *.c
+recursive-include lib *.pyx
+recursive-include lib *.pxd
+recursive-include src *.c
+recursive-include src *.h
+
+include doc/*
+include lib/pysam/csamtools.pxd
+include lib/pysam/csamtools.pyx
+include lib/pysam/csamtools.c
+include lib/pysam/ctabix.pxd
+include lib/pysam/ctabix.c
+include lib/pysam/ctabix.pyx
+include lib/pysam/TabProxies.c
+include lib/pysam/TabProxies.pyx
+include lib/pysam/TabProxies.pxd
+include lib/pysam/cvcf.pyx
+include lib/pysam/cvcf.pxd
+include lib/pysam/cvcf.c
+include lib/pysam/*.c
+include lib/pysam/*.h
+include lib/pysam/pysam_util.h
+include lib/pysam/tabix_util.h
+include lib/samtools/*.h
+include lib/samtools/*/*.h
+include lib/tabix/*.c
+include lib/tabix/*.h
+include lib/pysam.py
+

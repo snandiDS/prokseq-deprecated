@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: RSeQC
+Version: 2.6.2
+Summary: RNA-seq QC Package
+Home-page: http://rseqc.sourceforge.net/
+Author: Liguo Wang
+Author-email: wangliguo78@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: Linux
+Platform: MacOS
+Classifier: Development Status :: 1 - productive
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: GPL
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Requires: cython (>=0.17)

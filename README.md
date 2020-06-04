@@ -76,9 +76,8 @@ CONDA:
 	   conda remove -p /home/path/testPrseq prokseq
 
 
-
-
-The default directory layout should look like below:
+Default directory layout should look like below:
+------------------------------------------------
 	.
 	./README
 	./depend/afterqc

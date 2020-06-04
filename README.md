@@ -196,17 +196,11 @@ SYNTAX:
 
 EXAMPLE:
 --------
+	python scripts/pipeline-v2.8.py -s samples -p param.input -n 4
 
-   python scripts/pipeline-v2.8.py -s samples -p param.input -n 4
+	The program will run with sample file "sample", and parameter file "param.input". The program will also utilize 4 processors.
 
-   The program will run with sample file "sample", and parameter file "param.input".
-   The program will also utilize 4 processors.
-
-To run the program the above mentioned dependencies are essential. However, the 
-executable binaries are bundled in the folder "depend". 
-The pipeline needs two more file, the parameter and the sample files. The details
-of the parameter and sample files are as below. An example parameter and sample 
-file are bundled together with the package.
+To run the program the above mentioned dependencies are essential. However, the executable binaries are bundled in the folder "depend". The pipeline needs two more file, the parameter and the sample files. The details of the parameter and sample files are as below. An example parameter and sample file are bundled together with the package.
 
 PARAMETER FILE:
 ===============

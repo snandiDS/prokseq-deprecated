@@ -353,7 +353,7 @@ If one or any of the above dependencies are missing user can install it  by foll
 
 Pyhton3:
 --------
-#Ubuntu
+	#Ubuntu
 	Ubuntu 17.10, Ubuntu 18.04 (and above) come with Python 3.6 by default. 
 	Ubuntu 16.10 and 17.04 do not come with Python 3.6 by default, but it is in the Universe repository. You should be able to install it with the following commands:
 
@@ -364,7 +364,7 @@ Pyhton3:
 	- sudo apt-get update
 	- sudo apt-get install python3.6
 
-#CentOS
+	#CentOS
 	User should first update the system with the yum package manager:
 	- sudo yum update
 	- sudo yum install yum-utils
@@ -376,13 +376,13 @@ Pyhton3:
 
 Installation of R:
 ------------------
-#Installing R on Ubuntu 19.04/18.04/16.04
+	#Installing R on Ubuntu 19.04/18.04/16.04
 	Prior to installing R, user need to update the system package index and upgrade all  installed packages using the following two commands:
 	-sudo apt update
 	-sudo apt -y upgrade
 	After that, run the following in the command line to install base R.
 	-sudo apt -y install r-base
-## Install R on CentOS 7 
+	# Install R on CentOS 7 
 	R packages are available in the EPEL repositories. It can be installed by typing:
 	-sudo yum install epel-release
 
@@ -410,7 +410,7 @@ Installation of R Bioconductor packages:
 
 Samtools:
 ---------
-#Ubuntu 18.04 or higher
+	#Ubuntu 18.04 or higher
 	Install samtools by entering the following commands in the terminal:
 	-sudo apt update
 	-sudo apt install samtools
@@ -418,7 +418,7 @@ Samtools:
 
 EXTERNAL TOOLS:
 ---------------
-This program uses the following tools.
+	This program uses the following tools.
 	1. FastQC : This package runs the quality check
 	2. Bowtie : Needed for aligning the reads
 	3. Pypy : For speed and memory usage we sometime uses pypy an alternative implementation of python 3.6

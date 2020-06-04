@@ -236,6 +236,7 @@ There should be one parameter file. The entries of the file should be as follows
 	PATHWAY cutoffNegative -2.0
 	#	For pathway analysis, define the organism in three alphabets as below.
 	#	ypy = Yersinia pseudotuberculosis
+	#	User need to change the keg abbreviation of their genome which can be found in https://www.genome.jp/kegg/catalog/org_list.html. Here ypy is the Yersinia pseudotuberculosis YPIII
 	PATHWAY Organism ypy
 	#	For Gene Ontology of the pathway analysis, define GO term and gene name file.
 	PATHWAY TERM2GENE data/TERM2GENE.csv
@@ -334,17 +335,17 @@ DATA FILES:
 ===========
 	1. Samples files in fastq format.
 	2. Pathway analysis:
-		1. Gene Ontology to gene mapping csv file (Eg: GO:0003688,YPK_0001)
-		2. Gene Ontology to terms mapping csv file (Eg: GO:0000001,mitochondrion inheritance)
+		1. TERN2GENE.csv
+		   Gene Ontology to terms mapping csv file (Eg: GO:0000001,mitochondrion inheritance). This is genome specific Gene ontology file.  TERM2GENE.csv is a comma delimited 2 column file. First column is the GO term and second column is the gene name. User can download the GO file or GFF annotation file from Genome2D webserver (http://genome2d.molgenrug.nl/g2d_core_select_genbank.php )
+		2. TERM2NAME.csv
+		   Gene Ontology to gene mapping csv file (Eg: GO:0003688,YPK_0001). This is the GO term classification which is common for all organisms.		
 
-	For Bowtie imlementation:
-	-------------------------
-		1. Genome file in fasta format
-		2. GTF file
-		3. Bed file
-	For Salmon implementation:
-	--------------------------
-		1. Transcript file in fasta format
+	3. For Bowtie imlementation:
+	      Genome file in fasta format
+	   For Salmon implementation:
+	      Transcript file in fasta format
+	4. GTF file
+	5. Bed file
 
 
 INSTALLAION INSTRUCTION FOR THE DEPENDENCIES:

@@ -11,24 +11,30 @@ DOCKER:
 	We strongly recommend to use docker to run the pipeline. The external dependencies and R dependencies are all bundled in the container.
 	The container prokseq-v2.1:v1 is available in https://hub.docker.com/repository/docker/snandids/prokseq-v2.1
 
-	To pull the image from the Docker Hub registry:
+	Step 1: To pull the image from the Docker Hub registry:
 	   docker pull snandids/prokseq-v2.1:v1
 
-	To Run:
+	Step 2: To Run:
 	   docker run -it snandids/prokseq-v2.1:v1
 	   sh-5.0# cd prokseq
+	   
+	Step 3: Activate the environment
 	   sh-5.0# source /etc/profile.d/conda.sh
 	   sh-5.0# conda activate py36
            (py36) sh-5.0# <YOU WILL GET THIS PROMPT>
+
+	Step 4: Run the example
            Here run the pipeline with the example files:
               (py36) sh-5.0# python scripts/pipeline-v2.8.py -s samples.bowtie.PEsample -p param.input.bowtie -n 4
               The script is running with PE (paired-end) samples described in 
 	      samples.bowtie.PEsample, and with the parameters defined in 
 	      param.input.bowtie. The program is submitted with four processors.
 
-	To copy the files (sample[fq/fastq], GTF, BED, fasta, etc) to the container:
-
-	Find out the containerID from "docker ps -a" from another terminal. For example:
+	Step 5: Work with real data. To copy the files (sample[fq/fastq], GTF, BED, fasta, etc) to the container:
+	Find out the containerID from another terminal. For example:
+	Run the command 
+	   docker ps -a
+	Output (somewhat similar):
 	CONTAINER ID        IMAGE                      COMMAND             CREATED             STATUS                    PORTS               NAMES
 	8f780c0a9969        snandids/prokseq-v2.1:v1   "sh"                5 minutes ago       Up 5 minutes                                  fervent_feynman
 
@@ -38,23 +44,22 @@ DOCKER:
 
 CONDA:
 ------
-	conda install -p <PATH_TO_DOWNLOAD> -c <CHANNEL> prokseq
-	Example:
-	   mkdir testPrseq
-	   conda install -p /home/path/testPrseq -c snandids prokseq
+	Step 1: Fetch the package.
+	   conda install -p <PATH_TO_DOWNLOAD> -c <CHANNEL> prokseq
+	   Example:
+	      mkdir testPrseq
+	      conda install -p /home/path/testPrseq -c snandids prokseq
 
-	Once the package is obtained, run the following commands.
+	Step 2: Once the package is obtained, run the following commands.
 	   tar -xvzf data.tar.gz
 	   tar -xvzf exampleFiles.tar.gz
 
-	Please download the dependencies from github [https://github.com/snandiDS/prokseq].
-	Store the files and folders in depend directory.
+	Step 3: Install dependencies.
+	Please download the dependencies from github [https://github.com/snandiDS/prokseq]. Store the files and folders in depend directory.
 	And also install the R and the R bioconductor packages.
-	Though the pipeline is written in Python3.6, but some packages used in the
-	pipeline require Python2.7. Therefore, it is adviced to install Python2.
-	The program should find python2 and python (python3) in the env PATH.
-	After installing Python2, to make the life easier, we recommend create
-	virtual environment.
+	Though the pipeline is written in Python3.6, but some packages used in the pipeline require Python2.7. Therefore, it is adviced to install Python2. The program should find python2 and python (python3) in the env PATH. After installing Python2, to make the life easier, we recommend create
+	
+	Step 4: Create virtual environment
 	   conda create -n yourenvname python=3.6
 	   conda activate yourenvname
 	   conda install pandas
@@ -62,14 +67,10 @@ CONDA:
 	   pip2 install qc bitsets RSeQC
 	   pip2 install --upgrade cython bx-python pysam RSeQC numpy
 
-
-	Once all the dependencies and R packages are installed, and the
-	example files are untared, run the following command to test run the pipeline.
+	Step 5:
+	Once all the dependencies and R packages are installed, and the example files are untared, run the following command to test run the pipeline.
 	   python scripts/pipeline-v2.8.py -s samples.bowtie.PEsample -p param.input.bowtie -n 4
-
-	The script is running with PE (paired-end) samples described in
-        samples.bowtie.PEsample, and with the parameters defined in
-        param.input.bowtie. The program is submitted with four processors.
+	   Description:	The script is running with PE (paired-end) samples described in samples.bowtie.PEsample, and with the parameters defined in param.input.bowtie. The program is submitted with four processors.
 
 	And to remove:
 	   conda remove -p /home/path/testPrseq prokseq
@@ -190,66 +191,66 @@ PARAMETER FILE:
 ===============
 There should be one parameter file. The entries of the file should be as follows.
 
-####################################################################
-#	File "param.input" - defination file
-#	Define the paths and parameters to run the external packages.
-####################################################################
-#	Describe the Bowtie options below as:
-#	These are the default values.
-BOWTIE -I 0
-BOWTIE -X 500
-BOWTIE -k 1
-BOWTIE -p 40
-#	In case the package salmon is to be run, uncomment the options.
-#	These are the default values.
-#SALMONINDEX -k 29
-#SALMONQUANT -l A
-#SALMONQUANT -p 2
-#SALMONQUANT --validateMappings TRUE
-#	Define the Featurecounts options as below:
-FEATURECOUNTS a oldAnnotationGFF.gtf
-FEATURECOUNTS o test
-#	Specify a count file name
-COUNTFILE testN.csv
-#	geneBody coverage.r require a bed file. Specify the name of bed file as below:
-geneBody_coverage r oldAnnotationGFF.bed
-#	Specify if batch effect removal is required. FALSE if not required.
-BATCH_EFFECT_REMOVE TRUE
-#	For pathway analysis, define the log fold change cutoff as below:
-PATHWAY cutoffPositive 2.0
-PATHWAY cutoffNegative -2.0
-#	For pathway analysis, define the organism in three alphabets as below.
-#	ypy = Yersinia pseudotuberculosis
-PATHWAY Organism ypy
-#	For Gene Ontology of the pathway analysis, define GO term and gene name file.
-PATHWAY TERM2GENE data/TERM2GENE.csv
-PATHWAY TERM2NAME data/TERM2NAME.csv
-#	Specify the path to samtools
-PATH SAMTOOLS /home/snandi/samtools/bin 
-#	Specify the root path. That means where the ProkSeq bundle is unpacked.
-#	The location should have the following folders
-#	1. depend - contains all the binaries of the external packages
-#	2. scripts - contains all the modules required for ProkSeq, and pipeline-vx.x.sh
-#	3. data - Contains Gene ontology files for pathway analysis.
-PATH ROOT /home/snandi/firojPipeline/version_2.6
-#	If the above environment (depend, scripts, data) is true, the following
-#	line maye uncommented.
-#PATH DEFAULT
-#	Specify the path to geneBody_coverage
-PATH geneBody_coverage /home/snandi/firojPipeline/version_2.6/depend/RSeQC-2.6.2/scripts/
-#	Specify the path to FEATURECOUNTS
-PATH FEATURECOUNTS /home/snandi/firojPipeline/version_2.6/depend/subread-1.4.6-p5-Linux-i386/bin/
-#	Specify the path to fastqc
-PATH FASTQC /home/snandi/firojPipeline/version_2.6/depend/FastQC
-#	Specify the path to bowtie
-PATH BOWTIE /home/snandi/firojPipeline/version_2.6/depend/bowtie2/bowtie2-2.3.5.1-linux-x86_64
-#	Specify the path to pypy required for running afterqc
-PATH PYPY /home/snandi/firojPipeline/version_2.6/depend/pypy2.7-v7.2.0-linux64/bin
-#	Specify the path to readfasta
-PATH READFASTA /home/snandi/firojPipeline/version_2.6/depend
-#
-#	End of file "param.input"
-#
+	####################################################################
+	#	File "param.input" - defination file
+	#	Define the paths and parameters to run the external packages.
+	####################################################################
+	#	Describe the Bowtie options below as:
+	#	These are the default values.
+	BOWTIE -I 0
+	BOWTIE -X 500
+	BOWTIE -k 1
+	BOWTIE -p 40
+	#	In case the package salmon is to be run, uncomment the options.
+	#	These are the default values.
+	#SALMONINDEX -k 29
+	#SALMONQUANT -l A
+	#SALMONQUANT -p 2
+	#SALMONQUANT --validateMappings TRUE
+	#	Define the Featurecounts options as below:
+	FEATURECOUNTS a oldAnnotationGFF.gtf
+	FEATURECOUNTS o test
+	#	Specify a count file name
+	COUNTFILE testN.csv
+	#	geneBody coverage.r require a bed file. Specify the name of bed file as below:
+	geneBody_coverage r oldAnnotationGFF.bed
+	#	Specify if batch effect removal is required. FALSE if not required.
+	BATCH_EFFECT_REMOVE TRUE
+	#	For pathway analysis, define the log fold change cutoff as below:
+	PATHWAY cutoffPositive 2.0
+	PATHWAY cutoffNegative -2.0
+	#	For pathway analysis, define the organism in three alphabets as below.
+	#	ypy = Yersinia pseudotuberculosis
+	PATHWAY Organism ypy
+	#	For Gene Ontology of the pathway analysis, define GO term and gene name file.
+	PATHWAY TERM2GENE data/TERM2GENE.csv
+	PATHWAY TERM2NAME data/TERM2NAME.csv
+	#	Specify the path to samtools
+	PATH SAMTOOLS /home/snandi/samtools/bin 
+	#	Specify the root path. That means where the ProkSeq bundle is unpacked.
+	#	The location should have the following folders
+	#	1. depend - contains all the binaries of the external packages
+	#	2. scripts - contains all the modules required for ProkSeq, and pipeline-vx.x.sh
+	#	3. data - Contains Gene ontology files for pathway analysis.
+	PATH ROOT /home/snandi/firojPipeline/version_2.6
+	#	If the above environment (depend, scripts, data) is true, the following
+	#	line maye uncommented.
+	#PATH DEFAULT
+	#	Specify the path to geneBody_coverage
+	PATH geneBody_coverage /home/snandi/firojPipeline/version_2.6/depend/RSeQC-2.6.2/scripts/
+	#	Specify the path to FEATURECOUNTS
+	PATH FEATURECOUNTS /home/snandi/firojPipeline/version_2.6/depend/subread-1.4.6-p5-Linux-i386/bin/
+	#	Specify the path to fastqc
+	PATH FASTQC /home/snandi/firojPipeline/version_2.6/depend/FastQC
+	#	Specify the path to bowtie
+	PATH BOWTIE /home/snandi/firojPipeline/version_2.6/depend/bowtie2/bowtie2-2.3.5.1-linux-x86_64
+	#	Specify the path to pypy required for running afterqc
+	PATH PYPY /home/snandi/firojPipeline/version_2.6/depend/pypy2.7-v7.2.0-linux64/bin
+	#	Specify the path to readfasta
+	PATH READFASTA /home/snandi/firojPipeline/version_2.6/depend
+	#
+	#	End of file "param.input"
+	#
 
 In general, the entries starting with BOWTIE instructs the program to run the tool with the additional parameter. Similarly FEATURECOUNTS. Entries starting with PATH indicates the path to the executables of the external tools. However, if one is using the bundled packages in depend folder, then PATH DEFAULT should be mentioned.
 
@@ -262,49 +263,48 @@ Another file is required for the program. This file is called the samples. This 
 have the following format. Please don't change the format of the file. Simply replace the
 fastq, sam and the conditions of the sample.
 
-###################################################################################
-#	File "sample" - sample description file
-#	Specify the names of the sample files and tag them as "treat" and "control".
-###################################################################################
-#	Specify the genome file, and specify the path where the 
-#	indexed file will be stored, and the prifex of the indexed genome.
-#	Default is 'bowtie2_genome'.
-GENOME SequenceChromosome.fasta bowtie2_genome/sequenceChr
-#	Specify the fastq files
-#	Specify the output name of the sam files.
-#	Followed by the tag/class/condition of the sample (treated or control)
-#	List all the fastq files as below.
-FASTQ Biofilm_36h_1.R1.fastq Biofilm_36h_1.R2.fastq Biofilm_36h_1.sam treat
-FASTQ Biofilm_36h_2.R1.fastq Biofilm_36h_2.R2.fastq Biofilm_36h_2.sam treat
-FASTQ Biofilm_36h_3.R1.fastq Biofilm_36h_3.R2.fastq Biofilm_36h_3.sam treat
-FASTQ Planktonic_36h_1.R1.fastq Planktonic_36h_1.R2.fastq Planktonic_36h_1.sam control
-FASTQ Planktonic_36h_2.R1.fastq Planktonic_36h_2.R2.fastq Planktonic_36h_2.sam control
-FASTQ Planktonic_36h_3.R1.fastq Planktonic_36h_3.R2.fastq Planktonic_36h_3.sam control
-#
-#	End of file "sample"
-#
+	###################################################################################
+	#	File "sample" - sample description file
+	#	Specify the names of the sample files and tag them as "treat" and "control".
+	###################################################################################
+	#	Specify the genome file, and specify the path where the 
+	#	indexed file will be stored, and the prifex of the indexed genome.
+	#	Default is 'bowtie2_genome'.
+	GENOME SequenceChromosome.fasta bowtie2_genome/sequenceChr
+	#	Specify the fastq files
+	#	Specify the output name of the sam files.
+	#	Followed by the tag/class/condition of the sample (treated or control)
+	#	List all the fastq files as below.
+	FASTQ Biofilm_36h_1.R1.fastq Biofilm_36h_1.R2.fastq Biofilm_36h_1.sam treat
+	FASTQ Biofilm_36h_2.R1.fastq Biofilm_36h_2.R2.fastq Biofilm_36h_2.sam treat
+	FASTQ Biofilm_36h_3.R1.fastq Biofilm_36h_3.R2.fastq Biofilm_36h_3.sam treat
+	FASTQ Planktonic_36h_1.R1.fastq Planktonic_36h_1.R2.fastq Planktonic_36h_1.sam control
+	FASTQ Planktonic_36h_2.R1.fastq Planktonic_36h_2.R2.fastq Planktonic_36h_2.sam control
+	FASTQ Planktonic_36h_3.R1.fastq Planktonic_36h_3.R2.fastq Planktonic_36h_3.sam control
+	#
+	#	End of file "sample"
+	#
 
 In general, this file starts with GENOME entry. As in the example, the genome file to be used in the analysis is SequenceChromosome.fasta. The next argument indicates what would be the prifex of the indexed genome, and where to store.
 The following lines are FASTQ. The first argument in the entry is forward fastq file and second is the reverse fastq file. However, if one has only single end reads, only one entry may be there. The subsequent argument is the SAM file name. After running the bowtie what should be the output name of the sam files. In this example, Biofilm_36h_1.sam, Biofilm_36h_2.sam, etc are the sam files for Biofilm_36h_1.R1/R2.fastq, Biofilm_36h_2.R1/R2.fastq, etc. The last argument is the condition/class of the sample file (example: "treat" and "control").
 
 In case of SALMON:
-
-###################################################################################
-#	File "sample" - sample description file
-#	Specify the names of the sample files and tag them as "treat" and "control".
-###################################################################################
-#	Specify the transcript file, and specify the path where the 
-#	indexed transcript file will be stored.
-GENOME transcripts.fasta transcripts_index
-#	Specify the fastq files
-#	Specify the output name of the alignment files.
-#	Followed by the tag/class/condition of the sample (treated or control)
-#	List all the fastq files as below.
-FASTQ reads_1.fastq reads_2.fastq sal_quant1 treat
-FASTQ reads_3.fastq reads_4.fastq sal_quant2 control
-#
-#	End of file "sample"
-#
+	###################################################################################
+	#	File "sample" - sample description file
+	#	Specify the names of the sample files and tag them as "treat" and "control".
+	###################################################################################
+	#	Specify the transcript file, and specify the path where the 
+	#	indexed transcript file will be stored.
+	GENOME transcripts.fasta transcripts_index
+	#	Specify the fastq files
+	#	Specify the output name of the alignment files.
+	#	Followed by the tag/class/condition of the sample (treated or control)
+	#	List all the fastq files as below.
+	FASTQ reads_1.fastq reads_2.fastq sal_quant1 treat
+	FASTQ reads_3.fastq reads_4.fastq sal_quant2 control
+	#
+	#	End of file "sample"
+	#
 
 In general, this file starts with GENOME entry. As in the example, the transcript file to be used in the analysis is transcripts.fasta. The next argument is indicates what would be the prifex of the indexed file, and where to store.
 The following lines are FASTQ. The first argument in the entry is forward fastq file and second is the reverse fastq file. However, if one has only single end reads, only one entry may be there. The subsequent argument is the directory where the alignment file has to be stored. The last argument is the condition/class of the sample file (example: "treat" and "control").
@@ -333,99 +333,76 @@ If one or any of the above dependencies are missing user can install it  by foll
 Pyhton3:
 --------
 #Ubuntu
-Ubuntu 17.10, Ubuntu 18.04 (and above) come with Python 3.6 by default. 
-Ubuntu 16.10 and 17.04 do not come with Python 3.6 by default, but it is in the Universe repository. You should be able to install it with the following commands:
+	Ubuntu 17.10, Ubuntu 18.04 (and above) come with Python 3.6 by default. 
+	Ubuntu 16.10 and 17.04 do not come with Python 3.6 by default, but it is in the Universe repository. You should be able to install it with the following commands:
 
-- sudo apt-get update
-- sudo apt-get install python3.6
+	- sudo apt-get update
+	- sudo apt-get install python3.6
 
-For Ubuntu 14.04 or 16.04, Python 3.6 is not in the Universe repository, and user do not need to get it from a Personal Package Archive (PPA). For example, to install Python from the “deadsnakes” PPA, do the following:
-- sudo apt-get update
-- sudo apt-get install python3.6
+	For Ubuntu 14.04 or 16.04, Python 3.6 is not in the Universe repository, and user do not need to get it from a Personal Package Archive (PPA). For example, to install Python from the “deadsnakes” PPA, do the following:
+	- sudo apt-get update
+	- sudo apt-get install python3.6
 
 #CentOS
-User should first update the system with the yum package manager:
-- sudo yum update
-- sudo yum install yum-utils
-Then install the CentOS IUS package 
-- sudo yum install https://centos7.iuscommunity.org/ius-release.rpm
-Then install Python and Pip:
-- sudo yum install python36u
-- sudo yum install python36u-pip
+	User should first update the system with the yum package manager:
+	- sudo yum update
+	- sudo yum install yum-utils
+	Then install the CentOS IUS package 
+	- sudo yum install https://centos7.iuscommunity.org/ius-release.rpm
+	Then install Python and Pip:
+	- sudo yum install python36u
+	- sudo yum install python36u-pip
 
 Installation of R:
 ------------------
 #Installing R on Ubuntu 19.04/18.04/16.04
-Prior to installing R, user need to update the system package index and upgrade all  installed packages using the following two commands:
--sudo apt update
--sudo apt -y upgrade
-After that, run the following in the command line to install base R.
--sudo apt -y install r-base
+	Prior to installing R, user need to update the system package index and upgrade all  installed packages using the following two commands:
+	-sudo apt update
+	-sudo apt -y upgrade
+	After that, run the following in the command line to install base R.
+	-sudo apt -y install r-base
 ## Install R on CentOS 7 
-R packages are available in the EPEL repositories. It can be installed by typing:
--sudo yum install epel-release
+	R packages are available in the EPEL repositories. It can be installed by typing:
+	-sudo yum install epel-release
 
-Once the repository is added, install R by typing:
--sudo yum install R
+	Once the repository is added, install R by typing:
+	-sudo yum install R
 
 Installation of R Bioconductor packages:
 ----------------------------------------
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+	if (!requireNamespace("BiocManager", quietly = TRUE))
+    		install.packages("BiocManager")
 
-edgeR:
-BiocManager::install("edgeR")
-DESeq2:
-BiocManager::install("DESeq2")
-NOISeq:
-BiocManager::install("NOISeq")
-limma:
-BiocManager::install("limma")
-clusterProfiler:
-BiocManager::install("clusterProfiler")
-apeglm:
-BiocManager::install("apeglm")
+	edgeR:
+	BiocManager::install("edgeR")
+	DESeq2:
+	BiocManager::install("DESeq2")
+	NOISeq:
+	BiocManager::install("NOISeq")
+	limma:
+	BiocManager::install("limma")
+	clusterProfiler:
+	BiocManager::install("clusterProfiler")
+	apeglm:
+	BiocManager::install("apeglm")
 
 
 Samtools:
 ---------
 #Ubuntu 18.04 or higher
-Install samtools by entering the following commands in the terminal:
--sudo apt update
--sudo apt install samtools
-For other version of Ubuntu or centose use the samtools.sh script in the package folder
-User need to go to the PorkSeq folder and open a terminal and write sh samtools.sh.
- in the command line The program will install samtools in the samtools directory. 
+	Install samtools by entering the following commands in the terminal:
+	-sudo apt update
+	-sudo apt install samtools
+	For the other version of Ubuntu or centose use the samtools.sh script in the package folder. User can go to the PorkSeq folder and open a terminal and write sh samtools.sh. The program will install samtools in the samtools directory. 
 
 EXTERNAL TOOLS:
 ---------------
 This program uses the following tools.
-1. FastQC : This package runs the quality check
-2. Bowtie : Needed for aligning the reads
-3. Pypy : For speed and memory usage we sometime uses pypy an alternative implementation of python 3.6
-4. featureCounts from subread: a software program developed for counting reads to genomic features such as genes, exons, promoters and genomic bins.
-5. AfterQc: Tools for automatic filtering trimming of the fastq sequences.
+	1. FastQC : This package runs the quality check
+	2. Bowtie : Needed for aligning the reads
+	3. Pypy : For speed and memory usage we sometime uses pypy an alternative implementation of python 3.6
+	4. featureCounts from subread: a software program developed for counting reads to genomic features such as genes, exons, promoters and genomic bins.
+	5. AfterQc: Tools for automatic filtering trimming of the fastq sequences.
 
 To run the program the above mentions dependencies are essential. However, the executable binaries are bundled in the folder depend.
 For ubuntu 18.04 or higher version use sudo apt-get update | apt-get install python3-pandas to install pandas 
-
-
-DETAILS OF THE PARAMETER FILE:
-==============================
-All the parameter options are described herethrough
--BOWTIE I 0: Entries starting with BOWTIE instructs the program to run the tool with the additional parameter. Users are advised not to change this options.
--BOWTIE X 500: With this parameter ProkSeq run bowtie with  expected genomic distance from end to end pair reads within 500 base pairs. Users can change this option between 200-500 according to their data. For details it is advised to go through Bowtie2 manual page at http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#end-to-end-alignment-example 
--BOWTIE k 1: This parameter   is default for bowtie2 for searching distinct and valid alignments for each read.
--BOWTIE p 40: Number of processors to be used.
--FEATURECOUNTS a AnnotationGFF.gtf: This option will run featureCounts in default parameters. AnnotationGFF.gtf is the user dependent annotation file. If user does not have a gtf file which is default file type for featureCounts, GFF file can be converted by a script GFF2GTF.sh  
--FEATURECOUNTS o readCounts: This parameter is for the readCount file from the featureCounts. readCounts is the prefix of the output file.
-- geneBody_coverage r AnnotationGFF.bed: User need to provide the AnnotationGFF.bed file to get geneBody coverage plot. However, GFF2bed.sh script can be used to convert GFF file to .bed file. 
--BATCH_EFFECT_REMOVE TRUE: User need to make it TRUE if there is a batch effect. By default ProkSeq will run as  BATCH_EFFECT_REMOVE FALSE
--PATHWAY cutoffPositive 2.0 : This is the log2fold cut off for pathway enrichment for the up regulated genes. User can change it according to their need and cut off.  
--PATHWAY cutoffNegative -2.0: This is the log2fold cut off for pathway enrichment for the down regulated genes. User can change it according to their need and cut off.  
--PATHWAY Organism ypy: User need to change the keg abbreviation of their genome which can be found in https://www.genome.jp/kegg/catalog/org_list.html . Here ypy is the Yersinia pseudotuberculosis YPIII 
--PATHWAY TERM2GENE TERM2GENE.csv: This is genome specific Gene ontology file.  TERM2GENE.csv is a comma delimited 2 column file. First column is the GO term and second column is the gene name. User can download the GO file or GFF annotation file from Genome2D webserver (http://genome2d.molgenrug.nl/g2d_core_select_genbank.php ) 
--PATHWAY TERM2NAME TERM2NAME.csv: This is the GO term classification which is common for all organisms. 
--PATH SAMTOOLS /usr/bin: By default samtools installed in usr/bin but user can direct the path by changing it if necessary. 
--Entries starting with PATH indicates the path to the executables of the external tools. However, if one is using the bundled packages in depend folder, then PATH DEFAULT should be mentioned as below.
--ROOT: path should indicate where the package is untarred. This folder should contain depend folder, fastq, python programs, param.input, and samples are present. In the example, /home/snandi/firojPipeline/ contains all the above mentioned files.

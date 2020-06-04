@@ -100,6 +100,29 @@ Default directory layout should look like below:
 	./scripts/libmod/__init__.py
 	./scripts/libmod/pipeFunc.py
 	./scripts/libmod/__pycache__
+Example files layout:
+	sampleCtrl_1.R1.fq
+	sampleCtrl_1.R2.fq
+	sampleCtrl_2.R1.fq
+	sampleCtrl_2.R2.fq
+	sampleCtrl_3.R1.fq
+	sampleCtrl_3.R2.fq
+	sampleTreat_1.R1.fq
+	sampleTreat_1.R2.fq
+	sampleTreat_2.R1.fq
+	sampleTreat_2.R2.fq
+	sampleTreat_3.R1.fq
+	sampleTreat_3.R2.fq
+	samples.bowtie.PEsample
+	samples.bowtie.SEsample
+	samples.salmon.PEsample
+	samples.salmon.SEsample
+	oldAnnotationGFF.bed
+	oldAnnotationGFF.gtf
+	orf_coding_all.fasta
+	SequenceChromosome.fasta
+
+
 
 
 REQUIRMENTS:
@@ -110,45 +133,45 @@ ProkSeq requires the following packages:
 
 EXTERNAL TOOLS:
 ---------------
-   Package/program	:	Purpose
-   ---------------		-------
-   FastQC 		:	Quality check
-   Bowtie 		: 	Aligning the reads
-   Pypy 		: 	For speed and memory usage we sometime 
-				uses pypy an alternative implementation 
-				of python 3.6
-   featureCounts
-    from subread	: 	Counting reads to genomic features such as
-				genes, exons, promoters and genomic bins.
-   AfterQc		: 	Automatic filtering trimming of the fastq
-				sequences.
-   Samtools		:	For post-processing of the SAM and BAM 
-				reads alignment files.
-   Salmon		:	A tool for wicked-fast transcript 
-				quantification from RNA-seq data.
+Package/program	:	Purpose
+---------------		-------
+FastQC 		:	Quality check
+Bowtie 		: 	Aligning the reads
+Pypy 		: 	For speed and memory usage we sometime 
+			uses pypy an alternative implementation 
+			of python 3.6
+featureCounts
+from subread	: 	Counting reads to genomic features such as
+			genes, exons, promoters and genomic bins.
+AfterQc		: 	Automatic filtering trimming of the fastq
+			sequences.
+Samtools	:	For post-processing of the SAM and BAM 
+			reads alignment files.
+Salmon		:	A tool for wicked-fast transcript 
+			quantification from RNA-seq data.
 
 
-   R packages		:	Purpose
-   --------			-------
-   ggplot2		:	A system for declaratively creating graphics,
-				based on The Grammar of Graphics.
+R packages	:	Purpose
+--------		-------
+ggplot2		:	A system for declaratively creating graphics,
+			based on The Grammar of Graphics.
 
-   Bioconductor Packages:	Purpose
-   ---------------------	-------
-   DESeq2		:	Differential gene expression analysis based
-				on the negative binomial distribution.	
-   edgeR		:	Package for examining differential expressi-
-				on of replicated count data.
-   NOISeq		:	A non-parametric approach for the different-
-				ial expression analysis of RNseq-data. 
-   limma		:	A package for the analysis of gene expressi-
-				on data arising from microarray or RNA-seq
-				technologies.
-   clusterProfiler	:	To analyze functional profiles of genomic
-				coordinates (supported by ChIPseeker), gene
-				 and gene clusters.
-   apeglm		:	The adaptive t prior shrinkage estimator
-				used to Shrink log2 fold changes.
+Bioconductor Packages:	Purpose
+---------------------	-------
+DESeq2		:	Differential gene expression analysis based
+			on the negative binomial distribution.	
+edgeR		:	Package for examining differential expressi-
+			on of replicated count data.
+NOISeq		:	A non-parametric approach for the different-
+			ial expression analysis of RNseq-data. 
+limma		:	A package for the analysis of gene expressi-
+			on data arising from microarray or RNA-seq
+			technologies.
+clusterProfiler	:	To analyze functional profiles of genomic
+			coordinates (supported by ChIPseeker), gene
+			 and gene clusters.
+apeglm		:	The adaptive t prior shrinkage estimator
+			used to Shrink log2 fold changes.
 
 
 

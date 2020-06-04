@@ -31,12 +31,12 @@ DOCKER:
 	      param.input.bowtie. The program is submitted with four processors.
 
 	Step 5: Work with real data. To copy the files (sample[fq/fastq], GTF, BED, fasta, etc) to the container:
-	Find out the containerID from another terminal. For example:
-	Run the command 
-	   docker ps -a
-	Output (somewhat similar):
-	CONTAINER ID        IMAGE                      COMMAND             CREATED             STATUS                    PORTS               NAMES
-	8f780c0a9969        snandids/prokseq-v2.1:v1   "sh"                5 minutes ago       Up 5 minutes                                  fervent_feynman
+	   Find out the containerID from another terminal. For example:
+	   Run the command 
+	      docker ps -a
+	   Output (somewhat similar):
+	   CONTAINER ID        IMAGE                      COMMAND             CREATED             STATUS                    PORTS               NAMES
+	   8f780c0a9969        snandids/prokseq-v2.1:v1   "sh"                5 minutes ago       Up 5 minutes                                  fervent_feynman
 
 	Then run the command:
 	   docker cp test.fasta 8f780c0a9969:/root/prokseq/test.fasta
@@ -55,9 +55,9 @@ CONDA:
 	   tar -xvzf exampleFiles.tar.gz
 
 	Step 3: Install dependencies.
-	Please download the dependencies from github [https://github.com/snandiDS/prokseq]. Store the files and folders in depend directory.
-	And also install the R and the R bioconductor packages.
-	Though the pipeline is written in Python3.6, but some packages used in the pipeline require Python2.7. Therefore, it is adviced to install Python2. The program should find python2 and python (python3) in the env PATH. After installing Python2, to make the life easier, we recommend create
+	   Please download the dependencies from github [https://github.com/snandiDS/prokseq]. Store the files and folders in depend directory.
+	   And also install the R and the R bioconductor packages.
+	   Though the pipeline is written in Python3.6, but some packages used in the pipeline require Python2.7. Therefore, it is adviced to install Python2. The program should find python2 and python (python3) in the env PATH. After installing Python2, to make the life easier, we recommend create
 	
 	Step 4: Create virtual environment
 	   conda create -n yourenvname python=3.6
@@ -68,41 +68,39 @@ CONDA:
 	   pip2 install --upgrade cython bx-python pysam RSeQC numpy
 
 	Step 5:
-	Once all the dependencies and R packages are installed, and the example files are untared, run the following command to test run the pipeline.
-	   python scripts/pipeline-v2.8.py -s samples.bowtie.PEsample -p param.input.bowtie -n 4
-	   Description:	The script is running with PE (paired-end) samples described in samples.bowtie.PEsample, and with the parameters defined in param.input.bowtie. The program is submitted with four processors.
+	   Once all the dependencies and R packages are installed, and the example files are untared, run the following command to test run the pipeline.
+	      python scripts/pipeline-v2.8.py -s samples.bowtie.PEsample -p param.input.bowtie -n 4
+	      Description: The script is running with PE (paired-end) samples described in samples.bowtie.PEsample, and with the parameters defined in param.input.bowtie. The program is submitted with four processors.
 
-	And to remove:
+	To remove:
 	   conda remove -p /home/path/testPrseq prokseq
 
 
 
 
 The default directory layout should look like below:
-.
-./README
-./sample
-./param.input
-./depend/afterqc
-./depend/bowtie2
-./depend/FastQC
-./depend/pypy2.7-v7.2.0-linux64
-./depend/readFasta
-./depend/RSeQC-2.6.2
-./depend/salmon-latest_linux_x86_64
-./depend/samtools
-./depend/samtools-1.10
-./depend/subread-1.4.6-p5-Linux-i386
-./depend/wigToBigWig
-./scripts/pipeline-v2.8.py
-./scripts/samtools.sh
-./scripts/libmod
-./scripts/libmod/checkEnv.py
-./scripts/libmod/errMsgFn.py
-./scripts/libmod/execCmd.py
-./scripts/libmod/__init__.py
-./scripts/libmod/pipeFunc.py
-./scripts/libmod/__pycache__
+	.
+	./README
+	./depend/afterqc
+	./depend/bowtie2
+	./depend/FastQC
+	./depend/pypy2.7-v7.2.0-linux64
+	./depend/readFasta
+	./depend/RSeQC-2.6.2
+	./depend/salmon-latest_linux_x86_64
+	./depend/samtools
+	./depend/samtools-1.10
+	./depend/subread-1.4.6-p5-Linux-i386
+	./depend/wigToBigWig
+	./scripts/pipeline-v2.8.py
+	./scripts/samtools.sh
+	./scripts/libmod
+	./scripts/libmod/checkEnv.py
+	./scripts/libmod/errMsgFn.py
+	./scripts/libmod/execCmd.py
+	./scripts/libmod/__init__.py
+	./scripts/libmod/pipeFunc.py
+	./scripts/libmod/__pycache__
 
 
 REQUIRMENTS:

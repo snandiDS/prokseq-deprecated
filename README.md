@@ -183,16 +183,16 @@ This program is written in python 3.6, and uses the following python libraries. 
 
 SYNTAX:
 =======
-Usage: pipeline-v2.8.py [options] arg
+	Usage: pipeline-v2.8.py [options] arg
 
-Options:
-  -h, --help            show this help message
-  -s SAMPLE_FILE_NAME, --sample=SAMPLE_FILE_NAME
-                        provide the sample description file
-  -p PARAMETER_FILE_NAME, --param=PARAMETER_FILE_NAME
-                        provide the parameters defined file
-  -n NUMBER OF PROCESSORS, --numproc=NUMBER OF PROCESSORS
-                        provide the number of processors
+	Options:
+  	-h, --help            show this help message
+  	-s SAMPLE_FILE_NAME, --sample=SAMPLE_FILE_NAME
+	                        provide the sample description file
+  	-p PARAMETER_FILE_NAME, --param=PARAMETER_FILE_NAME
+        	                provide the parameters defined file
+  	-n NUMBER OF PROCESSORS, --numproc=NUMBER OF PROCESSORS
+	                        provide the number of processors
 
 EXAMPLE:
 --------

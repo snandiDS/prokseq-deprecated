@@ -8,7 +8,8 @@ The pipeline can be obtained from the following reposiories.
 
 DOCKER:
 -------
-	We strongly recommend to use docker to run the pipeline. The external dependencies and R dependencies are all bundled in the container.
+	We strongly recommend to use docker to run the pipeline. The external dependencies and R dependencies are all 
+	bundled in the container.
 	The container prokseq-v2.1:v1 is available in https://hub.docker.com/repository/docker/snandids/prokseq-v2.1
 
 	Step 1: To pull the image from the Docker Hub registry:
@@ -55,9 +56,12 @@ CONDA:
 	   tar -xvzf exampleFiles.tar.gz
 
 	Step 3: Install dependencies.
-	   Please download the dependencies from github [https://github.com/snandiDS/prokseq]. Store the files and folders in depend directory.
+	   Please download the dependencies from github [https://github.com/snandiDS/prokseq]. Store the files and 
+	   folders in depend directory.
 	   And also install the R and the R bioconductor packages.
-	   Though the pipeline is written in Python3.6, but some packages used in the pipeline require Python2.7. Therefore, it is adviced to install Python2. The program should find python2 and python (python3) in the env PATH. After installing Python2, to make the life easier, we recommend create
+	   Though the pipeline is written in Python3.6, but some packages used in the pipeline require Python2.7. 
+	   Therefore, it is adviced to install Python2. The program should find python2 and python (python3) in 
+	   the env PATH. After installing Python2, to make the life easier, we recommend create
 	
 	Step 4: Create virtual environment
 	   conda create -n yourenvname python=3.6
@@ -68,9 +72,11 @@ CONDA:
 	   pip2 install --upgrade cython bx-python pysam RSeQC numpy
 
 	Step 5:
-	   Once all the dependencies and R packages are installed, and the example files are untared, run the following command to test run the pipeline.
+	   Once all the dependencies and R packages are installed, and the example files are untared, run the
+	   following command to test run the pipeline.
 	      python scripts/pipeline-v2.8.py -s samples.bowtie.PEsample -p param.input.bowtie -n 4
-	      Description: The script is running with PE (paired-end) samples described in samples.bowtie.PEsample, and with the parameters defined in param.input.bowtie. The program is submitted with four processors.
+	      Description: The script is running with PE (paired-end) samples described in samples.bowtie.PEsample,
+	      and with the parameters defined in param.input.bowtie. The program is submitted with four processors.
 
 	To remove:
 	   conda remove -p /home/path/testPrseq prokseq
@@ -236,7 +242,7 @@ There should be one parameter file. The entries of the file should be as follows
 	PATHWAY cutoffNegative -2.0
 	#	For pathway analysis, define the organism in three alphabets as below.
 	#	ypy = Yersinia pseudotuberculosis
-	#	User need to change the keg abbreviation of their genome which can be
+	#	User need to change the kegg abbreviation of their genome which can be
 	#	found in https://www.genome.jp/kegg/catalog/org_list.html. Here ypy is
 	#	the Yersinia pseudotuberculosis YPIII
 	PATHWAY Organism ypy
@@ -338,9 +344,14 @@ DATA FILES:
 	1. Samples files in fastq format.
 	2. Pathway analysis:
 		1. TERN2GENE.csv
-		   Gene Ontology to terms mapping csv file (Eg: GO:0000001,mitochondrion inheritance). This is genome specific Gene ontology file.  TERM2GENE.csv is a comma delimited 2 column file. First column is the GO term and second column is the gene name. User can download the GO file or GFF annotation file from Genome2D webserver (http://genome2d.molgenrug.nl/g2d_core_select_genbank.php )
+		   Gene Ontology to terms mapping csv file (Eg: GO:0000001,mitochondrion inheritance). This is
+		   genome specific Gene ontology file.  TERM2GENE.csv is a comma delimited 2 column file.
+		   First column is the GO term and second column is the gene name. User can download the GO file
+		   or GFF annotation file from Genome2D webserver
+		   (http://genome2d.molgenrug.nl/g2d_core_select_genbank.php)
 		2. TERM2NAME.csv
-		   Gene Ontology to gene mapping csv file (Eg: GO:0003688,YPK_0001). This is the GO term classification which is common for all organisms.		
+		   Gene Ontology to gene mapping csv file (Eg: GO:0003688,YPK_0001). This is the GO term 
+		   classification which is common for all organisms.
 
 	3. For Bowtie imlementation:
 	      Genome file in fasta format
@@ -358,12 +369,15 @@ Pyhton3:
 --------
 	#Ubuntu
 	Ubuntu 17.10, Ubuntu 18.04 (and above) come with Python 3.6 by default. 
-	Ubuntu 16.10 and 17.04 do not come with Python 3.6 by default, but it is in the Universe repository. You should be able to install it with the following commands:
+	Ubuntu 16.10 and 17.04 do not come with Python 3.6 by default, but it is in the Universe repository.
+	You should be able to install it with the following commands:
 
 	- sudo apt-get update
 	- sudo apt-get install python3.6
 
-	For Ubuntu 14.04 or 16.04, Python 3.6 is not in the Universe repository, and user do not need to get it from a Personal Package Archive (PPA). For example, to install Python from the “deadsnakes” PPA, do the following:
+	For Ubuntu 14.04 or 16.04, Python 3.6 is not in the Universe repository, and user do not need to get
+	it from a Personal Package Archive (PPA). For example, to install Python from the “deadsnakes” PPA,
+	do the following:
 	- sudo apt-get update
 	- sudo apt-get install python3.6
 
@@ -380,7 +394,8 @@ Pyhton3:
 Installation of R:
 ------------------
 	#Installing R on Ubuntu 19.04/18.04/16.04
-	Prior to installing R, user need to update the system package index and upgrade all  installed packages using the following two commands:
+	Prior to installing R, user need to update the system package index and upgrade all  installed packages
+	using the following two commands:
 	-sudo apt update
 	-sudo apt -y upgrade
 	After that, run the following in the command line to install base R.
@@ -417,7 +432,9 @@ Samtools:
 	Install samtools by entering the following commands in the terminal:
 	-sudo apt update
 	-sudo apt install samtools
-	For the other version of Ubuntu or centose use the samtools.sh script in the package folder. User can go to the PorkSeq folder and open a terminal and write sh samtools.sh. The program will install samtools in the samtools directory. 
+	For the other version of Ubuntu or centose use the samtools.sh script in the package folder. User can
+	go to the PorkSeq folder and open a terminal and write sh samtools.sh. The program will install samtools
+	in the samtools directory. 
 
 EXTERNAL TOOLS:
 ---------------
@@ -425,7 +442,8 @@ EXTERNAL TOOLS:
 	1. FastQC : This package runs the quality check
 	2. Bowtie : Needed for aligning the reads
 	3. Pypy : For speed and memory usage we sometime uses pypy an alternative implementation of python 3.6
-	4. featureCounts from subread: a software program developed for counting reads to genomic features such as genes, exons, promoters and genomic bins.
+	4. featureCounts from subread: a software program developed for counting reads to genomic features such
+	as genes, exons, promoters and genomic bins.
 	5. AfterQc: Tools for automatic filtering trimming of the fastq sequences.
 
 To run the program the above mentions dependencies are essential. However, the executable binaries are bundled in the folder depend.

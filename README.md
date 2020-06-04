@@ -304,7 +304,7 @@ fastq, sam and the conditions of the sample.
 	#
 
 In general, this file starts with GENOME entry. As in the example, the genome file to be used in the analysis is SequenceChromosome.fasta. The next argument indicates what would be the prifex of the indexed genome, and where to store.
-The following lines are FASTQ. The first argument in the entry is forward fastq file and second is the reverse fastq file. However, if one has only single end reads, only one entry may be there. The subsequent argument is the SAM file name. After running the bowtie what should be the output name of the sam files. In this example, Biofilm_36h_1.sam, Biofilm_36h_2.sam, etc are the sam files for Biofilm_36h_1.R1/R2.fastq, Biofilm_36h_2.R1/R2.fastq, etc. The last argument is the condition/class of the sample file (example: "treat" and "control").
+The following lines are FASTQ. The first argument in the entry is forward fastq file and second is the reverse fastq file. However, if one has only single end reads, only one entry may be there. The subsequent argument is the SAM file name. After running the bowtie what should be the output name of the sam files. In this example, sampleTreat_1.sam, sampleTreat_2.sam, etc are the sam files for sampleTreat_1.R1/R2.fq, sampleTreat_2.R1/R2.fq, etc. The last argument is the condition/class of the sample file (example: "treat" and "control").
 
 In case of SALMON:
 

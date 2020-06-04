@@ -304,21 +304,27 @@ In general, this file starts with GENOME entry. As in the example, the genome fi
 The following lines are FASTQ. The first argument in the entry is forward fastq file and second is the reverse fastq file. However, if one has only single end reads, only one entry may be there. The subsequent argument is the SAM file name. After running the bowtie what should be the output name of the sam files. In this example, Biofilm_36h_1.sam, Biofilm_36h_2.sam, etc are the sam files for Biofilm_36h_1.R1/R2.fastq, Biofilm_36h_2.R1/R2.fastq, etc. The last argument is the condition/class of the sample file (example: "treat" and "control").
 
 In case of SALMON:
+
 	###################################################################################
-	#	File "sample" - sample description file
-	#	Specify the names of the sample files and tag them as "treat" and "control".
+	#       File "sample" - sample description file
+	#       Specify the names of the sample files and tag them as "treat" and "control".
 	###################################################################################
-	#	Specify the transcript file, and specify the path where the 
-	#	indexed transcript file will be stored.
-	GENOME transcripts.fasta transcripts_index
-	#	Specify the fastq files
-	#	Specify the output name of the alignment files.
-	#	Followed by the tag/class/condition of the sample (treated or control)
-	#	List all the fastq files as below.
-	FASTQ reads_1.fastq reads_2.fastq sal_quant1 treat
-	FASTQ reads_3.fastq reads_4.fastq sal_quant2 control
+	#       Specify the genome file, and specify the path where the 
+	#       indexed file will be stored, and the prifex of the indexed genome.
+	#       Default is 'bowtie2_genome'.
+	GENOME orf_coding_all.fasta transcripts_index
+	#       Specify the fastq files
+	#       Specify the output name of the quant files.   
+	#       Followed by the tag/class/condition of the sample (treated or control)
+	#       List all the fastq files as bellow.
+	FASTQ sampleTreat_1.R1.fq sampleTreat_1.R2.fq sal_quant1 treat
+	FASTQ sampleTreat_2.R1.fq sampleTreat_2.R2.fq sal_quant2 treat
+	FASTQ sampleTreat_3.R1.fq sampleTreat_3.R2.fq sal_quant3 treat
+	FASTQ sampleCtrl_1.R1.fq sampleCtrl_1.R2.fq sal_quant4 control
+	FASTQ sampleCtrl_2.R1.fq sampleCtrl_2.R2.fq sal_quant5 control
+	FASTQ sampleCtrl_3.R1.fq sampleCtrl_3.R2.fq sal_quant6 control
 	#
-	#	End of file "sample"
+	#       End of file "sample"
 	#
 
 In general, this file starts with GENOME entry. As in the example, the transcript file to be used in the analysis is transcripts.fasta. The next argument is indicates what would be the prifex of the indexed file, and where to store.

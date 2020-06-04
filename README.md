@@ -236,7 +236,9 @@ There should be one parameter file. The entries of the file should be as follows
 	PATHWAY cutoffNegative -2.0
 	#	For pathway analysis, define the organism in three alphabets as below.
 	#	ypy = Yersinia pseudotuberculosis
-	#	User need to change the keg abbreviation of their genome which can be found in https://www.genome.jp/kegg/catalog/org_list.html. Here ypy is the Yersinia pseudotuberculosis YPIII
+	#	User need to change the keg abbreviation of their genome which can be
+	#	found in https://www.genome.jp/kegg/catalog/org_list.html. Here ypy is
+	#	the Yersinia pseudotuberculosis YPIII
 	PATHWAY Organism ypy
 	#	For Gene Ontology of the pathway analysis, define GO term and gene name file.
 	PATHWAY TERM2GENE data/TERM2GENE.csv

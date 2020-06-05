@@ -60,6 +60,7 @@ CONDA:
            compiled on architecture x86_64 Fedora 31. Users may have to recompile some of them.
 
            Install the R and the R bioconductor packages.
+	   
            Though the pipeline is written in Python3.6, but some packages included in the pipeline require
            Python2.7. Therefore, it is advised to install Python2. The program should find python2 and
            python (python3) in the env PATH. To make life easier, we recommend create environment (Step 4).

@@ -4,11 +4,11 @@ quality control, and publication-quality figures. It is also less time consuming
 
 DOWNLOAD:
 =========
-The pipeline can be obtained from the following reposiories.
+The pipeline can be obtained from the following repositories.
 
 DOCKER:
 -------
-	We strongly recommend to use docker to run the pipeline. The external dependencies and R dependencies are all 
+	We strongly recommend using docker to run the pipeline. The external dependencies and R dependencies are all 
 	bundled in the container.
 	The container prokseq-v2.1:v1 is available in https://hub.docker.com/repository/docker/snandids/prokseq-v2.1
 
@@ -57,11 +57,11 @@ CONDA:
 
 	Step 3: Install dependencies.
 	   Please download the dependencies from github [https://github.com/snandiDS/prokseq]. Store the files and 
-	   folders in depend directory.
+	   folders in the depend directory.
 	   And also install the R and the R bioconductor packages.
 	   Though the pipeline is written in Python3.6, but some packages used in the pipeline require Python2.7. 
-	   Therefore, it is adviced to install Python2. The program should find python2 and python (python3) in 
-	   the env PATH. After installing Python2, to make the life easier, we recommend create
+	   Therefore, it is advised to install Python2. The program should find python2 and python (python3) in 
+	   the env PATH. After installing Python2, to make life easier, we recommend create
 	
 	Step 4: Create virtual environment
 	   conda create -n yourenvname python=3.6
@@ -134,7 +134,7 @@ Example files layout:
 
 REQUIRMENTS:
 ============
-User can run the ProkSeq program to see which depending packages are missing. By default, ProkSeq will search for required programs and print the availability of the program.
+Users can run the ProkSeq program to see which depending packages are missing. By default, ProkSeq will search for required programs and print the availability of the program.
 
 ProkSeq requires the following packages:
 
@@ -144,12 +144,12 @@ EXTERNAL TOOLS:
 	---------------		-------
 	FastQC 		:	Quality check
 	Bowtie 		: 	Aligning the reads
-	Pypy 		: 	For speed and memory usage we sometime 
+	Pypy 		: 	For speed and memory usage we sometimes
 				uses pypy an alternative implementation 
 				of python 3.6
 	featureCounts
 	from subread	: 	Counting reads to genomic features such as
-				genes, exons, promoters and genomic bins.
+				genes, exons, promoters, and genomic bins.
 	AfterQc		: 	Automatic filtering trimming of the fastq
 				sequences.
 	Samtools	:	For post-processing of the SAM and BAM 
@@ -206,7 +206,7 @@ EXAMPLE:
 
 	The program will run with sample file "sample", and parameter file "param.input". The program will also utilize 4 processors.
 
-To run the program the above mentioned dependencies are essential. However, the executable binaries are bundled in the folder "depend". The pipeline needs two more file, the parameter and the sample files. The details of the parameter and sample files are as below. An example parameter and sample file are bundled together with the package.
+To run the program, the dependencies mentioned above are essential. However, the executable binaries are bundled in the folder "depend". The pipeline needs two more files, the parameter, and the sample files. The details of the parameter and sample files are as below. An example parameter and sample file are bundled together with the package.
 
 PARAMETER FILE:
 ===============
@@ -276,9 +276,9 @@ There should be one parameter file. The entries of the file should be as follows
 	#	End of file "param.input"
 	#
 
-In general, the entries starting with BOWTIE instructs the program to run the tool with the additional parameter. Similarly FEATURECOUNTS. Entries starting with PATH indicates the path to the executables of the external tools. However, if one is using the bundled packages in depend folder, then PATH DEFAULT should be mentioned.
+In general, the entries starting with BOWTIE instructs the program to run the tool with the additional parameter. Similarly FEATURECOUNTS. Entries beginning with PATH indicates the path to the executables of the external tools.  However, if one uses the bundled packages in the depend folder, PATH DEFAULT should be mentioned.
 
-NOTE: If both bowtie and salmon's options are provided, the program will override the Bowtie options and the package samlmon will be run. Therefore, if salmon is required, please comment the Bowtie option lines, and vice versa.
+NOTE: The program will override the Bowtie options, and the package salmon will be run if both bowtie and salmon's options are provided. Therefore, if salmon is required, please comment on the Bowtie option lines, and vice versa.
 
 
 SAMPLE FILE:
@@ -309,8 +309,8 @@ fastq, sam and the conditions of the sample.
 	#	End of file "sample"
 	#
 
-In general, this file starts with GENOME entry. As in the example, the genome file to be used in the analysis is SequenceChromosome.fasta. The next argument indicates what would be the prifex of the indexed genome, and where to store.
-The following lines are FASTQ. The first argument in the entry is forward fastq file and second is the reverse fastq file. However, if one has only single end reads, only one entry may be there. The subsequent argument is the SAM file name. After running the bowtie what should be the output name of the sam files. In this example, sampleTreat_1.sam, sampleTreat_2.sam, etc are the sam files for sampleTreat_1.R1/R2.fq, sampleTreat_2.R1/R2.fq, etc. The last argument is the condition/class of the sample file (example: "treat" and "control").
+In general, this file starts with GENOME entry. As in the example, the genome file to be used in the analysis is SequenceChromosome.fasta. The next argument indicates what would be the prefix of the indexed genome, and where to store.
+The following lines are FASTQ. The first argument in the entry is forward fastq file, and second is the reverse fastq file. However, if one has only single-end reads, only one entry may be there. The subsequent argument is the SAM file name. After running the bowtie what should be the output name of the sam files. In this example, sampleTreat_1.sam, sampleTreat_2.sam, etc are the sam files for sampleTreat_1.R1/R2.fq, sampleTreat_2.R1/R2.fq, etc. The last argument is the condition/class of the sample file (example: "treat" and "control").
 
 In case of SALMON:
 
@@ -318,7 +318,7 @@ In case of SALMON:
 	#       File "sample" - sample description file
 	#       Specify the names of the sample files and tag them as "treat" and "control".
 	###################################################################################
-	#       Specify the genome file, and specify the path where the 
+	#       Specify the genome file and specify the path where the 
 	#       indexed file will be stored, and the prifex of the indexed genome.
 	#       Default is 'bowtie2_genome'.
 	GENOME orf_coding_all.fasta transcripts_index
@@ -336,8 +336,8 @@ In case of SALMON:
 	#       End of file "sample"
 	#
 
-In general, this file starts with GENOME entry. As in the example, the transcript file to be used in the analysis is transcripts.fasta. The next argument is indicates what would be the prifex of the indexed file, and where to store.
-The following lines are FASTQ. The first argument in the entry is forward fastq file and second is the reverse fastq file. However, if one has only single end reads, only one entry may be there. The subsequent argument is the directory where the alignment file has to be stored. The last argument is the condition/class of the sample file (example: "treat" and "control").
+In general, this file starts with GENOME entry. As in the example, the transcript file to be used in the analysis is transcripts.fasta. The next argument indicates what would be the prefix of the indexed file, and where to store.
+The following lines are FASTQ. The first argument in the entry is forward fastq file and second is the reverse fastq file. However, if one has only single-end reads, only one entry may be there. The subsequent argument is the directory where the alignment file has to be stored. The last argument is the condition/class of the sample file (example: "treat" and "control").
 
 DATA FILES:
 ===========
@@ -353,7 +353,7 @@ DATA FILES:
 		   Gene Ontology to gene mapping csv file (Eg: GO:0003688,YPK_0001). This is the GO term 
 		   classification which is common for all organisms.
 
-	3. For Bowtie imlementation:
+	3. For Bowtie implementation:
 	      Genome file in fasta format
 	   For Salmon implementation:
 	      Transcript file in fasta format
@@ -361,7 +361,7 @@ DATA FILES:
 	5. Bed file
 
 
-INSTALLAION INSTRUCTION FOR THE DEPENDENCIES:
+INSTALLATION INSTRUCTION FOR THE DEPENDENCIES:
 =============================================
 If one or any of the above dependencies are missing user can install it  by following the instructions below.
 
@@ -394,7 +394,7 @@ Pyhton3:
 Installation of R:
 ------------------
 	#Installing R on Ubuntu 19.04/18.04/16.04
-	Prior to installing R, user need to update the system package index and upgrade all  installed packages
+	Before installing R, user need to update the system package index and upgrade all  installed packages
 	using the following two commands:
 	-sudo apt update
 	-sudo apt -y upgrade

@@ -78,7 +78,7 @@ CONDA:
            change the PATH in parameter file (Eg. param.input.bowtie). The PATH should point to the packages.
 
            For example:
-              If you are usging the above-mentioned path [/home/path/testPrseq] from Step 1, then specify
+              If you are using the above-mentioned path [/home/path/testPrseq] from Step 1, then specify
               the path as below for all the packages in the parameter file.
               #       Specify the path to pypy required for running afterqc
               PATH PYPY /home/path/testPrseq/depend/pypy2.7-v7.2.0-linux64/bin
@@ -231,7 +231,7 @@ There should be one parameter file. The entries of the file should be as follows
 	BOWTIE -I 0
 	BOWTIE -X 500
 	BOWTIE -k 1
-	BOWTIE -p 40
+	BOWTIE -p 1
 	#	In case the package salmon is to be run, uncomment the options.
 	#	These are the default values.
 	#SALMONINDEX -k 29

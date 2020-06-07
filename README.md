@@ -134,6 +134,8 @@ Example files layout:
 	./samples.bowtie.SEsample
 	./samples.salmon.PEsample
 	./samples.salmon.SEsample
+	./param.input.bowtie
+	./param.input.salmon
 	./oldAnnotationGFF.bed
 	./oldAnnotationGFF.gtf
 	./orf_coding_all.fasta

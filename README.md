@@ -460,3 +460,5 @@ EXTERNAL TOOLS:
 
 To run the program the above mentions dependencies are essential. However, the executable binaries are bundled in the folder depend.
 For ubuntu 18.04 or higher version use sudo apt-get update | apt-get install python3-pandas to install pandas 
+User can download the depend folder along with all the dependencies from the following link
+https://umeauniversity-my.sharepoint.com/:u:/g/personal/aakk0004_ad_umu_se/EZ6UF28lCcJGiuPOWQ8oVr0BtQAK1caGUEdVHuP29_I01g?e=o1K0mh  
